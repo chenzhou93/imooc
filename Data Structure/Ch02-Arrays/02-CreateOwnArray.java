@@ -49,7 +49,7 @@ public class Array{
     }
 
     //Add element to first
-    public void addLast(int e){
+    public void addFirst(int e){
         add(0, e);
     }
 
