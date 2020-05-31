@@ -12,5 +12,18 @@ public class Main{
 
         arr.remove(2);
         System.out.println(arr);
+
+        //2-6 generic
+        Array<Integer> array = new Array<>(20);
+        // Array<Integer> array = new Array<Integer>(20);
+
+        //2-7 Dynamic
+        Array<Integer> array2 = new Array<>();
+        for(int i=0; i<10; i++){
+            array2.addLast(i);
+        }
+        array2.add(1, 100);
+        array2.addFirst(101);
+
     }
 }
