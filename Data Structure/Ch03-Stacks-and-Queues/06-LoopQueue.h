@@ -35,9 +35,9 @@ class LoopQueue : public Queue<T>{
 };
 
 template <typename T>
-LoopQueue<T>::LoopQueue(int c = 10){
+LoopQueue<T>::LoopQueue(int c){
     if(c > 0){
-        data = new T[c];
+        data = new T[c+1];
         capacity = c;
         size = 0;
         front = 0;
@@ -48,6 +48,7 @@ LoopQueue<T>::LoopQueue(int c = 10){
 template <typename T>
 LoopQueue<T>::~LoopQueue(){
     if(data){
+        data = NULL;
         delete[] data;
     }
 }
@@ -69,11 +70,12 @@ bool LoopQueue<T>::isEmpty(){
 
 template <typename T>
 void LoopQueue<T>::enqueue(T e){
-    if((tail+1)%capacity + 1 == front){
+    if((tail+1)%capacity == front){
         resize(2 * getCapacity());
     }else{
         data[tail] = e;
         tail = (tail + 1)%capacity;
+        //cout << "tail: " << tail << endl;
         size++;
     }   
 }
@@ -83,12 +85,13 @@ T LoopQueue<T>::dequeue(){
     if(isEmpty()){
         return -1;
     }
+    //cout << front << endl;
     T res = data[front];
     front = (front + 1) % capacity;
     size--;
-    if(size() == getCapacity()/4 && getCapacity()/2 != 0){
-        resize(getCapacity()/2);
-    }
+    // if(getSize() == getCapacity()/4 && getCapacity()/2 != 0){
+    //     resize(getCapacity()/2);
+    // }
     return res;
     
 }
@@ -103,14 +106,18 @@ T LoopQueue<T>::getFront(){
 
 template <typename T>
 void LoopQueue<T>::resize(int cap){
-    T* newData = new T[cap];
+    //cout << "resize..." << cap << endl;
+    T* newData = new T[cap+1];
     for(int i=0; i<size; i++){
         newData[i] = data[(i+front)%capacity];
+        //cout << "new data " << i << " " <<  newData[i] << endl;
     }
     data = newData;
     front = 0;
     tail = size;
-    delete newData;
+    capacity = cap;
+    newData = NULL;
+    delete[] newData;
 }
 
 #endif
