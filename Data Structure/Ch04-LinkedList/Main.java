@@ -7,7 +7,7 @@ public class Main{
             System.out.println(linkedlist);
         }
 
-        linkedlist.addFirst(2, 666);
+        linkedlist.add(2, 666);
         System.out.println(linkedlist);
     }
 }
