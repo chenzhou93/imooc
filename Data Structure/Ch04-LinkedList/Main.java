@@ -9,5 +9,16 @@ public class Main{
 
         linkedlist.add(2, 666);
         System.out.println(linkedlist);
+
+        //4-5 test
+        linkedlist.remove(2);
+        System.out.println(linkedlist);
+
+        linkedlist.removeFirst();
+        System.out.println(linkedlist);
+
+        linkedlist.removeLast();
+        System.out.println(linkedlist);
+
     }
 }
