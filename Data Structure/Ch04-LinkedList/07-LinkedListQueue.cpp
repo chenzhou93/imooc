@@ -100,7 +100,7 @@ T LinkedListQueue<T>::dequeue(){
 template <typename T>
 T LinkedListQueue<T>::getFront(){
     if(isEmpty()){
-        throw new IllegalArgumentException("");
+        return -1;
     }
     return head->e;
 }
@@ -113,4 +113,18 @@ void LinkedListQueue<T>::print(){
         p = p->next;
     }
     cout << endl;
+}
+
+int main(){
+    LinkedListQueue<int> queue;
+    for(int i=0; i<10; i++){
+        queue.enqueue(i);
+        queue.print();
+
+        if(i%3 ==2){
+            queue.dequeue();
+            queue.print();
+        }
+    }
+        
 }
