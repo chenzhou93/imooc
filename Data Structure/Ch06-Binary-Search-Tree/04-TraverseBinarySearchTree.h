@@ -68,7 +68,6 @@ Node<T>* BinarySearchTree<T>::add(Node<T>* node, T e){
     if(node == NULL){
         size++;
         Node<T>* tmp = new Node<T>(e);
-        cout << tmp->e << endl;
         return tmp;
     }
     if(node->e < e){
@@ -81,7 +80,13 @@ Node<T>* BinarySearchTree<T>::add(Node<T>* node, T e){
 
 template <typename T>
 void BinarySearchTree<T>::add(T e){
-    add(root, e);
+    if(root == NULL){
+        root = new Node<T>(e);
+        size++;
+    }else{
+        add(root, e);
+    }
+    
 }
 
 template <typename T>
@@ -164,10 +169,11 @@ void BinarySearchTree<T>::generateBSTString(Node<T>* node, int depth, string& re
         return;
     }
     string tmp = generateDepthString(depth);
-    stringstream ss;
-    ss >> node->e;
-    tmp += ss.str();
-    res.append(tmp);
+    
+    //res.append(tmp);
+    cout << tmp;
+    cout << node->e;
+    cout << endl;
     generateBSTString(node->left, depth+1, res);
     generateBSTString(node->right, depth+1, res);
 
@@ -176,9 +182,7 @@ void BinarySearchTree<T>::generateBSTString(Node<T>* node, int depth, string& re
 template <typename T>
 void BinarySearchTree<T>::print(){
     string result;
-    string& res = result;
-    generateBSTString(root, 0, res);
-    cout << res << endl;
+    generateBSTString(root, 0, result);
 }
 
 

@@ -10,9 +10,7 @@ int main(){
     for(int i=0; i<6; i++){
         bst.add(nums[i]);
     }
-
-    bst.preOrder();
-    bst.inOrder();
+    //bst.inOrder();
     bst.print();
 
     return 0;
