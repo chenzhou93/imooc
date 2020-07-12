@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 template <typename T>
@@ -66,7 +67,9 @@ template <typename T>
 Node<T>* BinarySearchTree<T>::add(Node<T>* node, T e){
     if(node == NULL){
         size++;
-        return new Node<T>(e);
+        Node<T>* tmp = new Node<T>(e);
+        cout << tmp->e << endl;
+        return tmp;
     }
     if(node->e < e){
         node->right = add(node->right, e);
@@ -157,12 +160,14 @@ string BinarySearchTree<T>::generateDepthString(int depth){
 template <typename T>
 void BinarySearchTree<T>::generateBSTString(Node<T>* node, int depth, string& res){
     if(node == NULL){
-        res.append(generateDepthString(depth) + "null\n");
+        res.append(generateDepthString(depth));
         return;
     }
-
-    res.append(generateDepthString(depth) + node->e + "\n");
-
+    string tmp = generateDepthString(depth);
+    stringstream ss;
+    ss >> node->e;
+    tmp += ss.str();
+    res.append(tmp);
     generateBSTString(node->left, depth+1, res);
     generateBSTString(node->right, depth+1, res);
 
