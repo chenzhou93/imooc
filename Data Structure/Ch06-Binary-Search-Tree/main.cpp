@@ -1,4 +1,4 @@
-#include "04-TraverseBinarySearchTree.h"
+#include "09-TraverseBinarySearchTreeNR.h"
 #include <iostream>
 
 using namespace std;
@@ -11,7 +11,9 @@ int main(){
         bst.add(nums[i]);
     }
     //bst.inOrder();
-    bst.print();
+    //bst.print();
+
+    bst.preOrderNR();
 
     return 0;
 }
