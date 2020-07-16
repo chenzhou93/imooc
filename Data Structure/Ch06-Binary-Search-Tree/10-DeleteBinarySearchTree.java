@@ -145,6 +145,113 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
     }
 
+    public E minimum(){
+        if(size==0){
+            throw new IllegalArgumentException("BST is empty!");
+        }
+        return minimum(root).e;
+    }
+
+    private Node minimum(Node node){
+        if(node.left == null){
+            return node;
+        }
+        return minimum(node.left);
+    }
+
+    public E maximum(){
+        if(size==0){
+            throw new IllegalArgumentException("BST is empty!");
+        }
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node){
+        if(node.right == null){
+            return node;
+        }
+        return maximum(node.right);
+    }
+
+    public E removeMin(){
+        E ret = minimum();
+        root = removeMin(root);
+        return ret;
+    }
+
+    private Node removeMin(Node node){
+        if(node.left == null){//递归到底的情况
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        //没到底的话继续
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    public E removeMax(){
+        E ret = maximum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    private Node removeMax(Node node){
+        if(node.right == null){//递归到底的情况
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        //没到底的话继续
+        node.right = removeMin(node.right);
+        return node;
+    }
+
+    public void remove(E e){
+        remove(root, e);
+    }
+
+    private Node remove(Node node, E e){
+        if(node == null){
+            return null;
+        }
+
+        if(e.compareTo(node.e) < 0){
+            node.left = remove(node.left, e);
+            return node;
+        }else if(e.compareTo(node.e) > 0){
+            node.right = remove(node.right, e);
+            return node;
+        }else{
+            //e == node.e
+            if(node.left == null){
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+
+            if(node.right == null){
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            Node successor = minimum(node.right);
+            successor.right = removeMin(node.right);
+            successor.left = node.left;
+
+            node.left = node.right = null;
+
+            return successor;
+        }
+    }
+
     @Override
     public String toString(){
         StringBuilder res = new StringBuilder();
