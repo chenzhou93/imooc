@@ -1,4 +1,4 @@
-#include "09-TraverseBinarySearchTreeNR.h"
+#include "10-DeleteBinarySearchTree.h"
 #include <iostream>
 
 using namespace std;
@@ -10,10 +10,8 @@ int main(){
     for(int i=0; i<6; i++){
         bst.add(nums[i]);
     }
-    //bst.inOrder();
-    //bst.print();
 
-    bst.preOrderNR();
+    bst.levelOrder();
 
     return 0;
 }
