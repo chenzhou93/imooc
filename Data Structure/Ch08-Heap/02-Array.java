@@ -156,4 +156,13 @@ public class Array<E>{
         data = newData;
     }
 
+    public void swap(int i, int j){
+        if(i < 0 || i >= size || j<0 || j>=size){
+            throw;
+        }
+        E t = data[i];
+        data[i] = data[j];
+        data[j] = t;
+    }
+
 }
