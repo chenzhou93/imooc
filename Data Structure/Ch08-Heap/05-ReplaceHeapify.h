@@ -15,6 +15,7 @@ class MaxHeap{
 
     public:
     MaxHeap();
+    MaxHeap(T arr[], int n);
     MaxHeap(int capacity);
     ~MaxHeap();
     int size();
@@ -22,6 +23,7 @@ class MaxHeap{
     void add(T e);
     T findMax();
     T extractMax();
+    T replace(T e);
 };
 
 template <typename T>
@@ -115,4 +117,19 @@ void MaxHeap<T>::siftDown(int k){
     }
 }
 
+template <typename T>
+T MaxHeap<T>::replace(T e){
+    T ret = findMax();
+    data->set(0, e);
+    siftDown(0);
+    return ret;
+}
+
+template <typename T>
+MaxHeap<T>::MaxHeap(T arr[], int n){
+    data = new MyArray<T>(arr, n);
+    for(int i=parent(data->size-1); i>=0; i--){
+        siftDown(i);
+    }
+}
 #endif

@@ -12,6 +12,7 @@ class MyArray{
 
     public:
     MyArray(int s=10);
+    MyArray(T arr[], int n);
     ~MyArray();
     int getSize();
     int getCapacity();
@@ -37,6 +38,15 @@ MyArray<T>::MyArray(int s){
     data = new T[s];
     size = 0;
     length = s;
+}
+
+template<typename T>
+MyArray<T>::MyArray(T arr[], int n){
+    data = new T[n*2];
+    for(int i=0; i<n; i++){
+        data[size++] = arr[i];
+    }
+    length = n;
 }
 
 template<typename T>
