@@ -98,7 +98,7 @@ public class SegmentTree<E>{
         }
         int mid = l + (r-l)/2;
         int leftTreeIndex = leftChild(treeIndex);
-        int rightTreeIndex = leftChild(treeIndex);
+        int rightTreeIndex = rightChild(treeIndex);
 
         if(index >= mid+1){
             set(rightTreeIndex, mid+1, r, index, e);
