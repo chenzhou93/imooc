@@ -15,7 +15,7 @@ public class UnionFind1 implements UF{
     }
 
     private int find(int p){
-        if(p<0 && p>=id.length){
+        if(p<0 || p>=id.length){
             throw new IllegalArgumentException("p is out of bound");
         }
         return id[p];
