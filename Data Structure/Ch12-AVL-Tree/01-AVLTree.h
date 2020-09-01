@@ -1,6 +1,10 @@
 #ifndef BST_H__
 #define BST_H__
 
+#include <cmath>
+#include <iostream>
+using namespace std;
+
 template<typename K, typename V>
 class Node{
     public:
@@ -8,9 +12,11 @@ class Node{
     V value;
     Node<K,V>* left;
     Node<K,V>* right;
+    int height;
     Node(K k, V v){
         key = k;
         value = v;
+        height = 1;
     }
 };
 
@@ -24,6 +30,9 @@ class BST{
     Node<K,V>* minimum(Node<K,V>* node);
     Node<K,V>* removeMin(Node<K,V>* node);
     Node<K,V>* remove(Node<K,V>* node, K key);
+    bool isBalanced(Node<K,V>* node);
+    int getHeight(Node<K,V>* node);
+    int getBalanceFactor(Node<K,V>* node);
 
     public:
     BST(){
@@ -36,7 +45,41 @@ class BST{
     V get(K key);
     void set(K key, V newValue);
     V remove(K key);
+    bool isBalanced();
 };
+
+template<typename K, typename V>
+int BST<K,V>::getHeight(Node<K,V>* node){
+    if(node == NULL){
+        return 0;
+    }
+    return node->height;
+}
+
+template<typename K, typename V>
+int BST<K,V>::getBalanceFactor(Node<K,V>* node){
+    if(node == NULL){
+        return 0;
+    }
+    return getHeight(node->left) - getHeight(node->right);
+}
+
+template<typename K, typename V>
+bool BST<K,V>::isBalanced(Node<K,V>* node){
+    if(node == NULL){
+        return true;
+    }
+    int balanceFactor = getBalanceFactor(node);
+    if(abs(balanceFactor) > 1){
+        return false;
+    }
+    return isBalanced(node->left) && isBalanced(node->right);
+}
+
+template<typename K, typename V>
+bool BST<K,V>::isBalanced(){
+    return isBalanced(root);
+}
 
 template<typename K, typename V>
 Node<K,V>* BST<K,V>::add(Node<K,V>* node, K key, V value){
@@ -51,6 +94,16 @@ Node<K,V>* BST<K,V>::add(Node<K,V>* node, K key, V value){
     }else{
         node->value = value;
     }
+
+    node->height = 1 + max(getHeight(node->left), getHeight(node->right));
+    int balanceFactor = getBalanceFactor(node);
+
+    if(abs(balanceFactor) > 1){
+        cout << "unbalanced: " << balanceFactor << endl;
+    }
+    
+    
+
     return node;
 }
 
@@ -151,6 +204,8 @@ V BST<K,V>::remove(K key){
     }
     return NULL;
 }
+
+
 
 
 
