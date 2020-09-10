@@ -54,6 +54,23 @@ public class RedBlackTree<K extends Comparable<K>, V> {
 
         return x;
     }
+    
+    private void flipColors(Node node){
+        node.color = RED;
+        node.left.color = BLACK;
+        node.right.color = BLACK;
+    }
+
+    private Node rightRotate(Node node){
+        Node x = node.left;
+        node.left = x.right;
+        x.right = node;
+
+        x.color = node.color;
+        node.color = RED;
+
+        return x;
+    }
 
     // 向红黑树中添加新的元素(key, value)
     public void add(K key, V value){
