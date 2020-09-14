@@ -106,12 +106,25 @@ Node<K,V>* RedBlackTree<K,V>::add(Node<K,V>* node, K key, V value){
     }else{
         node->value = value;
     }
+
+    if(isRed(node->right) && !isRed(node->left)){
+        node = leftRotate(node);
+    }
+
+    if(isRed(node->left) && isRed(node->left->left)){
+        node = rightRotate(node);
+    }
+
+    if(isRed(node->left) && isRed(node->right)){
+        flipColors(node);
+    }
     return node;
 }
 
 template<typename K, typename V>
 void RedBlackTree<K,V>::add(K key, V value){
     root = add(key, value);
+    root->color = BLACK;
 }
 
 template<typename K, typename V>
