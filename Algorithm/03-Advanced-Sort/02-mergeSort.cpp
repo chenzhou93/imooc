@@ -28,6 +28,7 @@ void __merge(T arr[], int l, int mid, int r){
     }
 }
 
+//递归使用归并排序，对arr[l...r]的范围进行排序
 template <typename T>
 void __mergeSort(T arr[], int l, int r){
     if(l >= r){
@@ -43,4 +44,8 @@ void __mergeSort(T arr[], int l, int r){
 template <typename T>
 void mergeSort(T arr[], int n){
     __mergeSort(arr, 0, n-1);
+}
+
+int main(){
+    return 0;
 }
