@@ -43,7 +43,7 @@ void __mergeSort(T arr[], int l, int r){
 
 template <typename T>
 void mergeSort(T arr[], int n){
-    __mergeSort(arr, 0, n-1);
+    __mergeSort(arr, 0, n-1);//[]
 }
 
 int main(){
